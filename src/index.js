@@ -34,14 +34,16 @@ function formatTime() {
 }
 formatTime();
 
-let form = document.querySelector("#city-search");
-let searchInput = document.querySelector("#search-input");
-let h1 = document.querySelector("h1");
-let iconElement = document.querySelector("#icon");
 function showTemp(response) {
-  let currentTemp = Math.round(response.data.main.temp);
   let tempHeading = document.querySelector("#temp");
+  let cityElement = document.querySelector("#city");
+  let iconElement = document.querySelector("#icon");
+
+  celsiusTemp = response.data.main.temp;
+
+  let currentTemp = Math.round(celsiusTemp);
   tempHeading.innerHTML = currentTemp;
+  cityElement.innerHTML = response.data.name;
 
   iconElement.setAttribute(
     "src",
@@ -49,29 +51,38 @@ function showTemp(response) {
   );
 }
 
-function citySearch(event) {
-  event.preventDefault();
-  h1.innerHTML = `${searchInput.value}`;
+function citySearch(city) {
   let apiKey = "55aafc03209b22601e8e8c1b2d96bad0";
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
 
-  axios
-    .get(`${apiUrl}${searchInput.value}&units=metric&appid=${apiKey}`)
-    .then(showTemp);
+  axios.get(`${apiUrl}${city}&units=metric&appid=${apiKey}`).then(showTemp);
+}
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  citySearch(cityInputElement.value);
 }
 
-form.addEventListener("submit", citySearch);
+let form = document.querySelector("#city-search");
+form.addEventListener("submit", handleSubmit);
 
-let temp = document.querySelector("#temp");
-let celsius = document.querySelector("#celsius");
+citySearch("New York");
+
 function displayC(event) {
   event.preventDefault();
-  temp.innerHTML = (("#temp" - 32) * 5) / 9;
+  let temp = document.querySelector("#temp");
+  temp.innerHTML = Math.round(celsiusTemp);
 }
+let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", displayC);
-let fahrenheit = document.querySelector("#fahrenheit");
+
 function displayF(event) {
   event.preventDefault();
-  temp.innerHTML = ("#temp" * 9) / 5 + 32;
+  let temp = document.querySelector("#temp");
+  let tempF = (celsiusTemp * 9) / 5 + 32;
+  temp.innerHTML = Math.round(tempF);
 }
+let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", displayF);
+
+let celsiusTemp = null;
