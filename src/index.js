@@ -34,6 +34,14 @@ function formatTime() {
 }
 formatTime();
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function showTemp(response) {
   let tempHeading = document.querySelector("#temp");
   let cityElement = document.querySelector("#city");
@@ -90,19 +98,26 @@ form.addEventListener("submit", handleSubmit);
 citySearch("Guildford");
 
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
-  let days = ["Thu", "Fri", "Sat", "Sun"];
 
   let forecastHTML = `<div class="grid">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="row cols-3" style="width: 20rem">
-              <div class="col" id=forecast-day>${day}</div>
-              <div class="col" id=forecast-temp>13°</div>
-              <div class="col" id=forecast-icon><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" width=75 /></div>
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="row cols-3" style="width: 20rem">
+              <div class="col" id=forecast-day>${formatDay(
+                forecastDay.dt
+              )}</div>
+              <div class="col" id=forecast-temp>${Math.round(
+                forecastDay.temp.day
+              )}</div>
+              <div class="col" id=forecast-icon><img src="http://openweathermap.org/img/wn/${
+                forecastDay.weather[0].icon
+              }@2x.png" alt="" width=70 /></div>
             </div>`;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
