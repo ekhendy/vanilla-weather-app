@@ -50,3 +50,8 @@ p {
 form {
   padding-top: 40px;
 }
+
+small {
+  display: block;
+  text-align: center;
+}
