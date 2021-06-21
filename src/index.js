@@ -46,12 +46,16 @@ function showTemp(response) {
   let tempHeading = document.querySelector("#temp");
   let cityElement = document.querySelector("#city");
   let iconElement = document.querySelector("#icon");
+  let descriptionElement = document.querySelector("#description");
+  let windElement = document.querySelector("#wind");
 
   celsiusTemp = response.data.main.temp;
 
   let currentTemp = Math.round(celsiusTemp);
   tempHeading.innerHTML = currentTemp;
   cityElement.innerHTML = response.data.name;
+  descriptionElement.innerHTML = response.data.weather[0].description;
+  windElement.innerHTML = Math.round(response.data.wind.speed);
 
   iconElement.setAttribute(
     "src",

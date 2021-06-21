@@ -14,10 +14,17 @@ h1 {
 h2,
 h3,
 .today,
-.time {
+.time,
+#description,
+.windSp {
   text-align: center;
   position: relative;
   right: 200px;
+}
+
+#description,
+.windSp {
+  font-size: 15px;
 }
 
 .degrees {
