@@ -80,23 +80,6 @@ fahrenheit.addEventListener("click", displayF);
 
 let celsiusTemp = null;
 
-function citySearch(city) {
-  let apiKey = "55aafc03209b22601e8e8c1b2d96bad0";
-  let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
-
-  axios.get(`${apiUrl}${city}&units=metric&appid=${apiKey}`).then(showTemp);
-}
-function handleSubmit(event) {
-  event.preventDefault();
-  let cityInputElement = document.querySelector("#city-input");
-  citySearch(cityInputElement.value);
-}
-
-let form = document.querySelector("#city-search");
-form.addEventListener("submit", handleSubmit);
-
-citySearch("Guildford");
-
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
@@ -129,3 +112,20 @@ function getForecast(coordinates) {
 
   axios.get(apiUrl).then(displayForecast);
 }
+
+function citySearch(city) {
+  let apiKey = "55aafc03209b22601e8e8c1b2d96bad0";
+  let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
+
+  axios.get(`${apiUrl}${city}&units=metric&appid=${apiKey}`).then(showTemp);
+}
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#search-input");
+  citySearch(cityInputElement.value);
+}
+
+let form = document.querySelector("#city-search");
+form.addEventListener("submit", handleSubmit);
+
+citySearch("Guildford");
