@@ -29,36 +29,11 @@
       <div class="card mx-auto" style="width: 50rem">
         <div class="card-body">
           <h1><strong id=city> </strong></h1>
-          <h2><img src="" alt="Clear" id="icon" /></h2>
+          <h2><img src="" alt="Clear" id="icon" width=125/></h2>
           <h3><strong id=temp> </strong><strong class=degrees><a href="" id=celsius>°C</a>/<a href="" id=fahrenheit>°F</a></strong></h3>
           <p class="today"> </p>
           <p class="time"> </p>
-          <div class="grid">
-            <div class="row cols-3" style="width: 20rem">
-              <div class="col">Wed</div>
-              <div class="col">19°</div>
-              <div class="col"><i class="fas fa-cloud-sun"></i></div>
-            </div>
-            <div class="row cols-3" style="width: 20rem">
-              <div class="col">Thurs</div>
-              <div class="col">13°</div>
-              <div class="col"><i class="fas fa-cloud"></i></div>
-            </div>
-            <div class="row cols-3" style="width: 20rem">
-              <div class="col">Fri</div>
-              <div class="col">13°</div>
-              <div class="col"><i class="fas fa-sun"></i></div>
-            </div>
-            <div class="row cols-3" style="width: 20rem">
-              <div class="col">Sat</div>
-              <div class="col">13°</div>
-              <div class="col"><i class="fas fa-sun"></i></div>
-            </div>
-            <div class="row cols-3" style="width: 20rem">
-              <div class="col">Sun</div>
-              <div class="col">13°</div>
-              <div class="col"><i class="fas fa-cloud"></i></div>
-            </div>
+          <div id=forecast>
           </div>
           <form id=city-search>
             <div class="row">
@@ -67,7 +42,7 @@
                 type="search"
                 placeholder="Search for another city"
                 class="form-control"
-                id="city-input"
+                id="search-input"
               />
             </div>
             <div class="col">
